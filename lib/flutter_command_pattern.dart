@@ -5,7 +5,7 @@
 /// - Pipeline system for middleware
 /// - Global observers for monitoring
 /// - Context-aware state handling
-library flutter_command_pattern;
+library;
 
 export 'src/commands/command.dart';
 export 'src/commands/command_with_params.dart';
