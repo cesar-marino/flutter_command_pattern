@@ -36,6 +36,8 @@ void main() {
       await tester.pump();
 
       expect(onLoadingCalled, isTrue);
+
+      await tester.pump(const Duration(milliseconds: 60));
     });
 
     testWidgets('observe should call onSuccess when command succeeds',

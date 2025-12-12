@@ -59,14 +59,18 @@ abstract class CommandBase extends ChangeNotifier {
     await pipelineChain();
   }
 
-  /// Emits a new state and notifies observers.
+  // Emits a new state and notifies observers.
   void _emit(CommandState newState, CommandContext context) {
     context.state = newState;
     _state = newState;
-
     // Notify global observers
     for (final observer in CommandObserverRegistry.observers) {
-      observer(context);
+      //observer(context);
+      try {
+        observer(context);
+      } catch (_) {
+        // intentionally ignored
+      }
     }
 
     notifyListeners();

@@ -150,10 +150,10 @@ void main() {
     });
 
     test('should notify global observers', () async {
-      final observedContexts = <CommandContext>[];
+      final observedStateTypes = <Type>[];
 
       CommandObserverRegistry.addObserver((context) {
-        observedContexts.add(context);
+        observedStateTypes.add(context.state.runtimeType);
       });
 
       command = Command(() async {
@@ -162,9 +162,9 @@ void main() {
 
       await command.execute();
 
-      expect(observedContexts.length, greaterThanOrEqualTo(2));
-      expect(observedContexts[0].state, isA<CommandRunning>());
-      expect(observedContexts.last.state, isA<CommandSuccess>());
+      expect(observedStateTypes.length, greaterThanOrEqualTo(2));
+      expect(observedStateTypes.first, equals(CommandRunning));
+      expect(observedStateTypes.last, equals(CommandSuccess));
     });
 
     test('reset should return command to initial state', () async {
