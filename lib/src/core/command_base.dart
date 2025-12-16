@@ -18,6 +18,9 @@ abstract class CommandBase extends ChangeNotifier {
   /// Whether the command is currently running.
   bool get isRunning => _state is CommandRunning;
 
+  /// Whether the command is completed.
+  bool get isCompleted => _state is CommandSuccess;
+
   /// Whether the command has failed.
   bool get hasError => _state is CommandFailure;
 
