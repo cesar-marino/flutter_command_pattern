@@ -1,3 +1,6 @@
+## 1.0.1
+* Add flag isCompleted in CommandBase
+
 ## 1.0.0
 
 * Initial release
@@ -7,6 +10,3 @@
 * Global observer system for monitoring
 * Context-aware state handling
 * Comprehensive documentation and examples
-
-## 1.0.1
-* Add flag isCompleted in CommandBase
