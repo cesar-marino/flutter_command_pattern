@@ -96,11 +96,11 @@ Designed for applications using **MVVM** and **Clean Architecture**, without rel
 
 ## Features
 
-✨ **Type-safe Commands** – Encapsulate async actions with explicit execution state
-🔄 **Pipeline System** – Intercept command execution for logging, analytics, caching, etc.
-👀 **Global Observers** – React to command lifecycle events across the app
-🎯 **Explicit State** – Loading, success, and failure handled in a predictable way
-📦 **Zero dependencies** – Pure Flutter implementation
+- ✨ **Type-safe Commands** – Encapsulate async actions with explicit execution state
+- 🔄 **Pipeline System** – Intercept command execution for logging, analytics, caching, etc.
+- 👀 **Global Observers** – React to command lifecycle events across the app
+- 🎯 **Explicit State** – Loading, success, and failure handled in a predictable way
+- 📦 **Zero dependencies** – Pure Flutter implementation
 
 ---
 
@@ -122,7 +122,7 @@ If you prefer **explicitness over abstraction**, this package is for you.
 
 ```yaml
 dependencies:
-  flutter_command_pattern: ^1.0.0
+  flutter_command_pattern: ^1.0.3
 ```
 
 ---
