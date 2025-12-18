@@ -1,3 +1,6 @@
+## 1.0.2
+* Update README to include full examples
+
 ## 1.0.1
 * Add flag isCompleted in CommandBase
 
