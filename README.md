@@ -4,7 +4,7 @@ If this plugin helps you create cleaner and more predictable Flutter application
 
 You can also support the development by buying me a coffee ☕👇
 
-[![Buy Me a Coffee](https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png)](https://www.buymeacoffee.com/cesarmarino)
+[![Buy Me a Coffee](https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png#compact)](https://www.buymeacoffee.com/cesarmarino)
 
 ---
 
@@ -49,7 +49,7 @@ If you prefer **explicitness over abstraction**, this package is for you.
 
 ```yaml
 dependencies:
-  flutter_command_pattern: ^1.0.5
+  flutter_command_pattern: ^1.0.6
 ```
 
 ---

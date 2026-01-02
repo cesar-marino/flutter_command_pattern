@@ -1,6 +1,6 @@
 name: flutter_command_pattern
 description: A powerful and elegant command pattern implementation for Flutter with pipeline support, observers, and state management.
-version: 1.0.5
+version: 1.0.6
 homepage: https://github.com/cesar-marino/flutter_command_pattern
 repository: https://github.com/cesar-marino/flutter_command_pattern
 issue_tracker: https://github.com/cesar-marino/flutter_command_pattern/issues

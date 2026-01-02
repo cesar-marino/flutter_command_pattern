@@ -1,3 +1,6 @@
+## 1.0.6
+* Fix README link
+
 ## 1.0.5
 * Fix README link
 
