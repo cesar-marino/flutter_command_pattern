@@ -4,7 +4,7 @@ If this plugin helps you create cleaner and more predictable Flutter application
 
 You can also support the development by buying me a coffee ☕👇
 
-[![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-Support-yellow)](https://www.buymeacoffee.com/cesarmarino)
+[![Buy Me a Coffee](https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png#compact)](https://www.buymeacoffee.com/cesarmarino)
 
 ---
 
