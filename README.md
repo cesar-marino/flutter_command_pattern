@@ -1,85 +1,24 @@
-<!-- # Flutter Command Pattern
+# ❤️ Support Flutter Command Pattern
 
-A powerful and elegant command pattern implementation for Flutter with pipeline support, observers, and state management.
+If this plugin helps you create cleaner and more predictable Flutter applications, please consider **leaving a 👍 here and a ⭐ on GitHub** — it really helps with the growth and visibility of the project.
 
-## Features
+You can also support the development by buying me a coffee ☕👇
 
-✨ **Type-safe Commands** - Execute async operations with built-in state management  
-🔄 **Pipeline System** - Chain middleware for logging, analytics, caching, etc.  
-👀 **Global Observers** - Monitor all command executions across your app  
-🎯 **Context-aware** - React to loading, success, and failure states  
-📦 **Zero dependencies** - Pure Flutter implementation  
+<script
+  type="text/javascript"
+  src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js"
+  data-name="bmc-button"
+  data-slug="cesarmarino"
+  data-color="#FFDD00"
+  data-emoji=""
+  data-font="Cookie"
+  data-text="Compre-me um café"
+  data-outline-color="#000000"
+  data-font-color="#000000"
+  data-coffee-color="#ffffff">
+</script>
 
-## Installation
-
-```yaml
-dependencies:
-  flutter_command_pattern: ^1.0.0
-```
-
-## Quick Start
-
-### Basic Command
-
-```dart
-final loginCommand = Command(() async {
-  await authService.login(email, password);
-});
-
-// Execute
-await loginCommand.execute();
-
-// Observe state
-loginCommand.observe(
-  context,
-  onLoading: (ctx) => showLoader(ctx),
-  onSuccess: (ctx) => navigateToHome(ctx),
-  onFailure: (ctx, error) => showError(ctx, error),
-);
-```
-
-### Command with Parameters
-
-```dart
-final fetchUserCommand = CommandWithParams<String>((userId) async {
-  return await api.fetchUser(userId);
-});
-
-await fetchUserCommand.execute('user123');
-```
-
-### Global Pipeline
-
-```dart
-void main() {
-  // Add logging pipeline
-  CommandPipelineRegistry.addPipeline((context, next) async {
-    print('Command started: ${context.command.runtimeType}');
-    await next();
-    print('Command finished: ${context.state.runtimeType}');
-  });
-
-  runApp(MyApp());
-}
-```
-
-### Global Observer
-
-```dart
-CommandObserverRegistry.addObserver((context) {
-  if (context.state is CommandFailure) {
-    analytics.logError(context.command, context.state);
-  }
-});
-```
-
-## Advanced Usage
-
-See the [example](example/lib/main.dart) for a complete implementation.
-
-## License
-
-MIT License - see [LICENSE](LICENSE) file for details. -->
+---
 
 # Flutter Command Pattern
 
@@ -98,7 +37,7 @@ Designed for applications using **MVVM** and **Clean Architecture**, without rel
 
 - ✨ **Type-safe Commands** – Encapsulate async actions with explicit execution state
 - 🔄 **Pipeline System** – Intercept command execution for logging, analytics, caching, etc.
-- 👀 **Global Observers** – React to command lifecycle events across the app
+- 👀 **Global & Lifecycle-safe Observers** – React to command lifecycle events across the app without memory leaks
 - 🎯 **Explicit State** – Loading, success, and failure handled in a predictable way
 - 📦 **Zero dependencies** – Pure Flutter implementation
 
@@ -122,7 +61,7 @@ If you prefer **explicitness over abstraction**, this package is for you.
 
 ```yaml
 dependencies:
-  flutter_command_pattern: ^1.0.3
+  flutter_command_pattern: ^1.0.4
 ```
 
 ---
@@ -248,6 +187,9 @@ CommandObserverRegistry.addObserver((context) {
   }
 });
 ```
+
+> ℹ️ `observe` is lifecycle-safe.  
+> Listeners are automatically removed when the widget is disposed, so no manual cleanup is required — even on Flutter Web.
 
 ---
 

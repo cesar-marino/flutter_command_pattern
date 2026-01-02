@@ -7,28 +7,10 @@ import '../typedefs/command_typedefs.dart';
 extension CommandBaseExtension on CommandBase {
   /// Observes command state changes with context-aware callbacks.
   ///
-  /// Example:
-  /// ```dart
-  /// loginCommand.observe(
-  ///   context,
-  ///   onLoading: (ctx) {
-  ///     showDialog(
-  ///       context: ctx,
-  ///       builder: (_) => LoadingDialog(),
-  ///     );
-  ///   },
-  ///   onSuccess: (ctx) {
-  ///     Navigator.of(ctx).pop(); // Close loading
-  ///     Navigator.of(ctx).pushNamed('/home');
-  ///   },
-  ///   onFailure: (ctx, error) {
-  ///     Navigator.of(ctx).pop(); // Close loading
-  ///     ScaffoldMessenger.of(ctx).showSnackBar(
-  ///       SnackBar(content: Text('Error: $error')),
-  ///     );
-  ///   },
-  /// );
-  /// ```
+  /// This implementation is lifecycle-safe:
+  /// - Automatically removes the listener when the BuildContext is disposed
+  /// - Prevents callbacks from running on a dead FlutterView (Web-safe)
+  /// - Does NOT require manual dispose by the developer
   void observe(
     BuildContext context, {
     OnLoading? onLoading,
@@ -42,8 +24,17 @@ extension CommandBaseExtension on CommandBase {
       onFailure: onFailure,
     );
 
-    addListener(() {
+    late VoidCallback listener;
+
+    listener = () {
+      if (!context.mounted) {
+        removeListener(listener);
+        return;
+      }
+
       observer.observe(state);
-    });
+    };
+
+    addListener(listener);
   }
 }
