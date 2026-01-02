@@ -4,19 +4,7 @@ If this plugin helps you create cleaner and more predictable Flutter application
 
 You can also support the development by buying me a coffee ☕👇
 
-<script
-  type="text/javascript"
-  src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js"
-  data-name="bmc-button"
-  data-slug="cesarmarino"
-  data-color="#FFDD00"
-  data-emoji=""
-  data-font="Cookie"
-  data-text="Compre-me um café"
-  data-outline-color="#000000"
-  data-font-color="#000000"
-  data-coffee-color="#ffffff">
-</script>
+[![Buy Me a Coffee](https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png)](https://www.buymeacoffee.com/cesarmarino)
 
 ---
 
