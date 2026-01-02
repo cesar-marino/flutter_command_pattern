@@ -1,3 +1,6 @@
+## 1.0.5
+* Fix README link
+
 ## 1.0.4
 * Fix: Make `Command.observe` lifecycle-safe
 * Automatically removes listeners when `BuildContext` is disposed
