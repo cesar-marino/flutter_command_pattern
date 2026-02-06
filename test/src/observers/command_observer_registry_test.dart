@@ -127,7 +127,7 @@ void main() {
     });
 
     test('observers should be notified of command failures', () async {
-      Object? observedError;
+      CommandError? observedError;
 
       CommandObserverRegistry.addObserver((context) {
         if (context.state is CommandFailure) {
@@ -142,7 +142,8 @@ void main() {
 
       await command.execute();
 
-      expect(observedError, equals(error));
+      expect(observedError, isNotNull);
+      expect(observedError!.initialError, equals(error));
 
       command.dispose();
     });

@@ -1,3 +1,5 @@
+import 'package:flutter_command_pattern/src/core/command_error.dart';
+
 /// Represents the state of a command execution.
 ///
 /// A command can be in one of four states:
@@ -47,19 +49,19 @@ final class CommandSuccess extends CommandState {
 
 /// State after failed execution.
 final class CommandFailure extends CommandState {
-  /// The error that caused the failure.
-  final Object error;
+  /// Standardized command error with code, message, and initial error.
+  final CommandError error;
+
+  /// The original error that caused the failure.
+  final Object? originalError;
 
   /// Optional stack trace for debugging.
   final StackTrace? stackTrace;
 
-  /// Standardized command error with code, message, and initial error.
-  final Object? commandError;
-
   const CommandFailure(
     this.error, [
+    this.originalError,
     this.stackTrace,
-    this.commandError,
   ]);
 
   @override
@@ -67,11 +69,11 @@ final class CommandFailure extends CommandState {
       identical(this, other) ||
       (other is CommandFailure &&
           other.error == error &&
-          other.stackTrace == stackTrace &&
-          other.commandError == commandError);
+          other.originalError == originalError &&
+          other.stackTrace == stackTrace);
 
   @override
-  int get hashCode => Object.hash(error, stackTrace, commandError);
+  int get hashCode => Object.hash(error, originalError, stackTrace);
 
   @override
   String toString() => 'CommandFailure(error: $error)';

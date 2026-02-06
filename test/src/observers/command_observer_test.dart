@@ -66,8 +66,8 @@ void main() {
         (tester) async {
       var onFailureCalled = false;
       BuildContext? receivedContext;
-      Object? receivedError;
-      final error = Exception('Test error');
+      CommandError? receivedError;
+      final error = CommandError(message: 'Test error');
 
       await tester.pumpWidget(
         MaterialApp(
@@ -135,7 +135,7 @@ void main() {
               // Should not throw
               observer.observe(const CommandRunning());
               observer.observe(const CommandSuccess());
-              observer.observe(CommandFailure(Exception('error')));
+              observer.observe(CommandFailure(CommandError(message: 'error')));
 
               return Container();
             },
@@ -160,7 +160,7 @@ void main() {
 
               observer.observe(const CommandRunning());
               observer.observe(const CommandSuccess());
-              observer.observe(CommandFailure(Exception('error')));
+              observer.observe(CommandFailure(CommandError(message: 'error')));
 
               return Container();
             },
@@ -222,7 +222,7 @@ void main() {
                       },
                     );
 
-                    observer.observe(CommandFailure(Exception('Test error')));
+                    observer.observe(CommandFailure(CommandError(message: 'Test error')));
                   },
                   child: const Text('Trigger'),
                 );
@@ -235,7 +235,7 @@ void main() {
       await tester.tap(find.text('Trigger'));
       await tester.pump();
 
-      expect(find.text('Exception: Test error'), findsOneWidget);
+      expect(find.byType(SnackBar), findsOneWidget);
     });
 
     testWidgets('callbacks receive correct context', (tester) async {

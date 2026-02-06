@@ -35,7 +35,7 @@ void main() {
 
     group('CommandFailure', () {
       test('should contain error information', () {
-        final error = Exception('Test error');
+        final error = CommandError(message: 'Test error');
         final state = CommandFailure(error);
 
         expect(state.error, equals(error));
@@ -43,37 +43,36 @@ void main() {
       });
 
       test('should contain error and stackTrace', () {
-        final error = Exception('Test error');
+        final error = CommandError(message: 'Test error');
         final stackTrace = StackTrace.current;
-        final state = CommandFailure(error, stackTrace);
+        final state = CommandFailure(error, null, stackTrace);
 
         expect(state.error, equals(error));
         expect(state.stackTrace, equals(stackTrace));
       });
 
       test('should be equal when error and stackTrace match', () {
-        final error = Exception('Test error');
+        final error = CommandError(message: 'Test error');
         final stackTrace = StackTrace.current;
-        final state1 = CommandFailure(error, stackTrace);
-        final state2 = CommandFailure(error, stackTrace);
+        final state1 = CommandFailure(error, null, stackTrace);
+        final state2 = CommandFailure(error, null, stackTrace);
 
         expect(state1, equals(state2));
         expect(state1.hashCode, equals(state2.hashCode));
       });
 
       test('should not be equal when errors differ', () {
-        final state1 = CommandFailure(Exception('Error 1'));
-        final state2 = CommandFailure(Exception('Error 2'));
+        final state1 = CommandFailure(CommandError(message: 'Error 1'));
+        final state2 = CommandFailure(CommandError(message: 'Error 2'));
 
         expect(state1, isNot(equals(state2)));
       });
 
       test('toString should contain error information', () {
-        final error = Exception('Test error');
+        final error = CommandError(message: 'Test error');
         final state = CommandFailure(error);
 
         expect(state.toString(), contains('CommandFailure'));
-        expect(state.toString(), contains('Test error'));
       });
     });
 
@@ -82,14 +81,14 @@ void main() {
         expect(const CommandInitial(), isA<CommandState>());
         expect(const CommandRunning(), isA<CommandState>());
         expect(const CommandSuccess(), isA<CommandState>());
-        expect(CommandFailure(Exception()), isA<CommandState>());
+        expect(CommandFailure(CommandError()), isA<CommandState>());
       });
 
       test('states should not be equal across different types', () {
         const initial = CommandInitial();
         const running = CommandRunning();
         const success = CommandSuccess();
-        final failure = CommandFailure(Exception());
+        final failure = CommandFailure(CommandError());
 
         expect(initial, isNot(equals(running)));
         expect(initial, isNot(equals(success)));

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../core/command_context.dart';
+import '../core/command_error.dart';
 
 /// A function that executes a command action.
 typedef CommandAction = Future<void> Function();
@@ -38,4 +39,4 @@ typedef OnLoading = void Function(BuildContext context);
 typedef OnSuccess = void Function(BuildContext context);
 
 /// Callback for when a command fails.
-typedef OnFailure = void Function(BuildContext context, Object error);
+typedef OnFailure = void Function(BuildContext context, CommandError error);

@@ -65,7 +65,7 @@ void main() {
       test('should return true when state is CommandFailure', () {
         final context = CommandContext(
           command: testCommand,
-          state: CommandFailure(Exception('error')),
+          state: CommandFailure(CommandError(message: 'error')),
         );
 
         expect(context.hasError, isTrue);
@@ -83,7 +83,7 @@ void main() {
 
     group('error', () {
       test('should return error when state is CommandFailure', () {
-        final error = Exception('test error');
+        final error = CommandError(message: 'test error');
         final context = CommandContext(
           command: testCommand,
           state: CommandFailure(error),

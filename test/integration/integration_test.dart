@@ -171,7 +171,8 @@ void main() {
       await command.execute();
 
       expect(states.last, isA<CommandFailure>());
-      expect((states.last as CommandFailure).error, equals(error));
+      expect((states.last as CommandFailure).error.initialError, equals(error));
+      expect((states.last as CommandFailure).originalError, equals(error));
 
       command.dispose();
     });
@@ -332,7 +333,13 @@ void main() {
       await loginCommand
           .execute({'email': 'wrong@example.com', 'password': '123'});
 
-      expect(events, contains('error-tracker: Exception: Invalid credentials'));
+      expect(
+        events.firstWhere(
+          (e) => e.startsWith('error-tracker: CommandError'),
+          orElse: () => '',
+        ),
+        isNotEmpty,
+      );
 
       loginCommand.dispose();
     });

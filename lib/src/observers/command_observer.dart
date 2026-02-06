@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../core/command_state.dart';
+import '../core/command_error.dart';
 import '../typedefs/command_typedefs.dart';
 
 /// A context-aware observer for command state changes.

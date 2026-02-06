@@ -30,7 +30,7 @@ abstract class CommandBase extends ChangeNotifier {
   CommandError? get error {
     if (_state is CommandFailure) {
       final failure = _state as CommandFailure;
-      return failure.commandError as CommandError?;
+      return failure.error;
     }
     return null;
   }
@@ -57,7 +57,7 @@ abstract class CommandBase extends ChangeNotifier {
       } catch (error, stackTrace) {
         final commandError =
             CommandErrorMapperRegistry.mapError(error, stackTrace);
-        _emit(CommandFailure(error, stackTrace, commandError), context);
+        _emit(CommandFailure(commandError, error, stackTrace), context);
       }
     }
 

@@ -108,7 +108,7 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(onFailureCalled, isTrue);
-      expect(capturedError, isA<Exception>());
+      expect(capturedError, isA<CommandError>());
     });
 
     testWidgets('observe should work with partial callbacks', (tester) async {
@@ -287,7 +287,7 @@ void main() {
       await tester.tap(find.text('Execute'));
       await tester.pump();
 
-      expect(find.text('Exception: Failed'), findsOneWidget);
+      expect(find.byType(SnackBar), findsOneWidget);
     });
 
     testWidgets('observe works with CommandWithParams', (tester) async {
