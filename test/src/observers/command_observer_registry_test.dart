@@ -131,7 +131,7 @@ void main() {
 
       CommandObserverRegistry.addObserver((context) {
         if (context.state is CommandFailure) {
-          observedError = context.error;
+          observedError = context.error as CommandError?;
         }
       });
 

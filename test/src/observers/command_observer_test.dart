@@ -67,7 +67,7 @@ void main() {
       var onFailureCalled = false;
       BuildContext? receivedContext;
       CommandError? receivedError;
-      final error = CommandError(message: 'Test error');
+      const error = CommandError(message: 'Test error');
 
       await tester.pumpWidget(
         MaterialApp(
@@ -82,7 +82,7 @@ void main() {
                 },
               );
 
-              observer.observe(CommandFailure(error));
+              observer.observe(const CommandFailure(error));
 
               return Container();
             },
@@ -135,7 +135,9 @@ void main() {
               // Should not throw
               observer.observe(const CommandRunning());
               observer.observe(const CommandSuccess());
-              observer.observe(CommandFailure(CommandError(message: 'error')));
+              observer.observe(
+                const CommandFailure(CommandError(message: 'error')),
+              );
 
               return Container();
             },
@@ -160,7 +162,9 @@ void main() {
 
               observer.observe(const CommandRunning());
               observer.observe(const CommandSuccess());
-              observer.observe(CommandFailure(CommandError(message: 'error')));
+              observer.observe(
+                const CommandFailure(CommandError(message: 'error')),
+              );
 
               return Container();
             },
@@ -222,7 +226,9 @@ void main() {
                       },
                     );
 
-                    observer.observe(CommandFailure(CommandError(message: 'Test error')));
+                    observer.observe(
+                      const CommandFailure(CommandError(message: 'Test error')),
+                    );
                   },
                   child: const Text('Trigger'),
                 );

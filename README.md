@@ -49,7 +49,7 @@ If you prefer **explicitness over abstraction**, this package is for you.
 
 ```yaml
 dependencies:
-  flutter_command_pattern: ^1.1.0
+  flutter_command_pattern: ^1.1.1
 ```
 
 ---

@@ -1,3 +1,10 @@
+## 1.1.1
+* Fix: Update CommandFailure structure to properly handle CommandError
+* Fix: Update all test assertions to validate CommandError properties
+* Fix: Update CommandObserver callbacks to properly handle CommandError type
+* Fix: Update OnFailure typedef to receive CommandError instead of Object
+* Ensure all exceptions are properly mapped to CommandError before state emission
+
 ## 1.1.0
 * Add custom error mapping system with `CommandError` class
 * Introduce `CommandErrorMapperRegistry` for registering custom error mappers
