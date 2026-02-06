@@ -3,6 +3,8 @@ import '../observers/command_observer_registry.dart';
 import '../pipelines/command_pipeline_registry.dart';
 import '../typedefs/command_typedefs.dart';
 import 'command_context.dart';
+import 'command_error.dart';
+import 'command_error_mapper.dart';
 import 'command_state.dart';
 
 /// Base class for all commands.
@@ -25,8 +27,13 @@ abstract class CommandBase extends ChangeNotifier {
   bool get hasError => _state is CommandFailure;
 
   /// The error if the command failed, null otherwise.
-  Object? get error =>
-      _state is CommandFailure ? (_state as CommandFailure).error : null;
+  CommandError? get error {
+    if (_state is CommandFailure) {
+      final failure = _state as CommandFailure;
+      return failure.commandError as CommandError?;
+    }
+    return null;
+  }
 
   /// Executes the command with the given action.
   ///
@@ -48,7 +55,9 @@ abstract class CommandBase extends ChangeNotifier {
         await action();
         _emit(const CommandSuccess(), context);
       } catch (error, stackTrace) {
-        _emit(CommandFailure(error, stackTrace), context);
+        final commandError =
+            CommandErrorMapperRegistry.mapError(error, stackTrace);
+        _emit(CommandFailure(error, stackTrace, commandError), context);
       }
     }
 

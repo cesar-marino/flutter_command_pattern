@@ -46,7 +46,9 @@ void main() {
       await command.execute();
 
       expect(command.hasError, isTrue);
-      expect(command.error, equals(error));
+      expect(command.error, isNotNull);
+      expect(command.error!.message, contains('Test error'));
+      expect(command.error!.initialError, equals(error));
       expect(command.state, isA<CommandFailure>());
     });
 

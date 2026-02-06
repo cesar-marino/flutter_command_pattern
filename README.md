@@ -49,7 +49,7 @@ If you prefer **explicitness over abstraction**, this package is for you.
 
 ```yaml
 dependencies:
-  flutter_command_pattern: ^1.0.6
+  flutter_command_pattern: ^1.1.0
 ```
 
 ---
@@ -178,6 +178,77 @@ CommandObserverRegistry.addObserver((context) {
 
 > ℹ️ `observe` is lifecycle-safe.  
 > Listeners are automatically removed when the widget is disposed, so no manual cleanup is required — even on Flutter Web.
+
+---
+
+## Error Mapping (Custom Error Handling)
+
+Map custom exception types to standardized `CommandError` objects for consistent error handling across your app.
+
+### Register Custom Error Mappers
+
+```dart
+void main() {
+  // Register mappers for your custom exceptions
+  CommandErrorMapperRegistry.register<NetworkException>(
+    (error) => CommandError(
+      code: 'NETWORK_ERROR',
+      message: 'Failed to connect to server',
+      initialError: error,
+    ),
+  );
+
+  CommandErrorMapperRegistry.register<ValidationException>(
+    (error) => CommandError(
+      code: 'VALIDATION_${error.field}',
+      message: 'Invalid ${error.field}: ${error.message}',
+      initialError: error,
+    ),
+  );
+
+  runApp(const MyApp());
+}
+```
+
+### Handling Mapped Errors in the UI
+
+```dart
+ListenableBuilder(
+  listenable: command,
+  builder: (context, _) {
+    if (command.hasError) {
+      final error = command.error;
+      
+      return switch (error?.code) {
+        'NETWORK_ERROR' => const Text('Check your internet connection'),
+        'VALIDATION_email' => const Text('Invalid email format'),
+        _ => Text('Error: ${error?.message}'),
+      };
+    }
+    return const SizedBox.shrink();
+  },
+)
+```
+
+### Automatic Fallback (No Mapper Registered)
+
+If no mapper is registered for an exception type, a default `CommandError` is created automatically:
+
+```dart
+// When an unmapped exception is thrown:
+throw SomeUnregistredException('Something went wrong');
+
+// Results in:
+CommandError(
+  code: null,  // No code when not mapped
+  message: 'SomeUnregistredException: Something went wrong',
+  initialError: SomeUnregistredException instance,
+)
+```
+
+This ensures your app never crashes from unhandled errors — they're always wrapped in `CommandError`.
+
+> 💡 **Tip:** Use the error's `initialError` property to access the original exception for detailed debugging or analytics.
 
 ---
 

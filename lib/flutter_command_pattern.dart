@@ -11,6 +11,8 @@ export 'src/commands/command.dart';
 export 'src/commands/command_with_params.dart';
 export 'src/core/command_base.dart';
 export 'src/core/command_context.dart';
+export 'src/core/command_error.dart';
+export 'src/core/command_error_mapper.dart';
 export 'src/core/command_state.dart';
 export 'src/extensions/command_base_extension.dart';
 export 'src/observers/command_observer.dart';

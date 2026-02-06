@@ -1,3 +1,13 @@
+## 1.1.0
+* Add custom error mapping system with `CommandError` class
+* Introduce `CommandErrorMapperRegistry` for registering custom error mappers
+* All exceptions are now automatically wrapped in standardized `CommandError` objects
+* Support mapping custom exception types to semantic error codes and messages
+* Add automatic fallback for unmapped exceptions (code: null, message: error.toString())
+* Breaking change: `CommandBase.error` now returns `CommandError?` instead of `Object?`
+* Add comprehensive error mapping documentation and examples
+* Fully backward compatible via automatic error wrapping
+
 ## 1.0.6
 * Fix README link
 

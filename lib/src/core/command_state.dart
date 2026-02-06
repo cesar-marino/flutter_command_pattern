@@ -53,17 +53,25 @@ final class CommandFailure extends CommandState {
   /// Optional stack trace for debugging.
   final StackTrace? stackTrace;
 
-  const CommandFailure(this.error, [this.stackTrace]);
+  /// Standardized command error with code, message, and initial error.
+  final Object? commandError;
+
+  const CommandFailure(
+    this.error, [
+    this.stackTrace,
+    this.commandError,
+  ]);
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       (other is CommandFailure &&
           other.error == error &&
-          other.stackTrace == stackTrace);
+          other.stackTrace == stackTrace &&
+          other.commandError == commandError);
 
   @override
-  int get hashCode => Object.hash(error, stackTrace);
+  int get hashCode => Object.hash(error, stackTrace, commandError);
 
   @override
   String toString() => 'CommandFailure(error: $error)';
